@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { TouchableOpacity, Text } from 'react-native';
 
 class DeckList extends Component {
 	render() {
 		return (
-			<View>
-				<Text>Deck List</Text>
-			</View>
+			<TouchableOpacity onPress={() => this.props.navigation.navigate(
+				'Deck',
+				{ deckId: 'Temporary Id'} )}>
+				<Text>Deck List Item Name</Text>
+			</TouchableOpacity>
 		);
 	}
 }
