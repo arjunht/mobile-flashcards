@@ -9,6 +9,9 @@ import Deck from './components/Deck';
 import Quiz from './components/Quiz';
 import NewQuestion from './components/NewQuestion';
 import { Constants } from 'expo';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './reducers';
 
 function UdaciStatusBar({ backgroundColor, ...props }) {
 	return (
@@ -99,10 +102,12 @@ const MainNavigator = createAppContainer(Stacks);
 export default class App extends React.Component {
 	render() {
 		return (
-			<View style={{flex: 1}}>
-				<UdaciStatusBar backgroundColor={purple} barStyle='light-content' />
-				<MainNavigator />
-			</View>
+			<Provider store={createStore(reducer)}>
+				<View style={{flex: 1}}>
+					<UdaciStatusBar backgroundColor={purple} barStyle='light-content' />
+					<MainNavigator />
+				</View>
+			</Provider>
 		);
 	}
 }
