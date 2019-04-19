@@ -4,10 +4,9 @@ import { View, Text, TouchableOpacity } from 'react-native';
 class Deck extends Component {
 	
 	static navigationOptions = ({ navigation }) => {
-		const { deckId } = navigation.state.params
+		const { deck } = navigation.state.params
 		
-		// Todo: Get the name of the deck
-		const deckName = 'Deck Name'
+		const deckName = deck.title
 		
 		return {
 			title: deckName
@@ -20,12 +19,12 @@ class Deck extends Component {
 				<Text>Number of cards</Text>
 				<TouchableOpacity onPress={() => this.props.navigation.navigate(
 					'NewQuestion',
-					{ deckId: 'Temporary Id' })}>
+					{ deck: 'Temporary Id' })}>
 					<Text>Add Card</Text>
 				</TouchableOpacity>
 				<TouchableOpacity onPress={() => this.props.navigation.navigate(
 					'Quiz',
-					{ deckId: 'Temporary Id' })}>
+					{ deck: 'Temporary Id' })}>
 					<Text>Start Quiz</Text>
 				</TouchableOpacity>
 			</View>

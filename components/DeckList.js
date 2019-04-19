@@ -5,8 +5,9 @@ class DeckList extends Component {
 	render() {
 		return (
 			<TouchableOpacity onPress={() => this.props.navigation.navigate(
-				'Deck',
-				{ deckId: 'Temporary Id'} )}>
+					'Deck',
+					{ deck: 'Temporary Id' }
+				)}>
 				<Text>Deck List Item Name</Text>
 			</TouchableOpacity>
 		);
