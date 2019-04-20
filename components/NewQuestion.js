@@ -11,7 +11,7 @@ function SubmitBtn ({ onPress }) {
 			onPress={onPress}>
 			<Text style={styles.submitBtnText}>SUBMIT</Text>
 		</TouchableOpacity>
-	)
+	);
 }
 
 class NewQuestion extends Component {
@@ -32,7 +32,7 @@ class NewQuestion extends Component {
 			answer
 		});
 	};
-  
+	
 	submit = () => {
 		
 		this.props.dispatch(addQuestion(this.props.deck.title, this.state));
@@ -83,10 +83,10 @@ const styles = StyleSheet.create({
 		marginLeft: 30
 	},
 	inputField: {
-        height: 40,
-        borderWidth: 1,
-        borderRadius: 5,
-        padding: 10
+		height: 40,
+		borderWidth: 1,
+		borderRadius: 5,
+		padding: 10
 	},
 	iosSubmitBtn: {
 		backgroundColor: purple,
