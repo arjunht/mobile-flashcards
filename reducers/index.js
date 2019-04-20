@@ -20,7 +20,10 @@ export default function decks(state = {}, action) {
 				...state,
 				[action.deck]: {
 					...state[action.deck],
-					questions: state[action.deck].questions.push(action.question)
+					questions: [
+						...state[action.deck].questions,
+						action.question
+					]
 				}
 			}
 		default :

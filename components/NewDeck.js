@@ -20,9 +20,9 @@ class NewDeck extends Component {
 		deck: ''
 	}
 	
-	handleChange = (text) => {
+	handleChange = (deck) => {
 		this.setState({
-			deck: text
+			deck
 		});
 	};
   
