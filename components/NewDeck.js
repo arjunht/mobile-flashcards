@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, Platform, StyleSheet } from 'r
 import { white, purple } from '../utils/colors';
 import { connect } from 'react-redux';
 import { addDeck } from '../actions';
+import { saveDeckTitle } from '../utils/api'
 
 function SubmitBtn ({ onPress }) {
 	return (
@@ -34,7 +35,7 @@ class NewDeck extends Component {
 			deck: ''
 		});
 		
-		// Save to AsyncStorage - saveDeckTitle: take in a single title argument and add it to the decks.
+		saveDeckTitle(this.state.deck);
 		
 		this.props.navigation.navigate(
 			'Deck',
