@@ -5,12 +5,13 @@ import { connect } from 'react-redux';
 import { addDeck } from '../actions';
 import { saveDeckTitle } from '../utils/api';
 
-function SubmitBtn ({ onPress }) {
+function SubmitBtn ({ onPress, disabled }) {
 	return (
 		<TouchableOpacity
 			style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
+			disabled={disabled}
 			onPress={onPress}>
-			<Text style={styles.submitBtnText}>SUBMIT</Text>
+			<Text style={styles.submitBtnText}>Create Deck</Text>
 		</TouchableOpacity>
 	);
 }
@@ -30,7 +31,7 @@ class NewDeck extends Component {
 	submit = () => {
 		
 		const { dispatch, navigation } = this.props;
-		const deck = this.state.deck;
+		const { deck } = this.state;
 		
 		dispatch(addDeck(deck));
 		
@@ -58,7 +59,7 @@ class NewDeck extends Component {
 						onChangeText={this.handleChange}
 					/>
 				</View>
-				<SubmitBtn onPress={this.submit} />
+				<SubmitBtn disabled={this.state.deck === ''} onPress={this.submit} />
 			</View>
 		);
 	}

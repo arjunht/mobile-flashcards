@@ -33,7 +33,7 @@ class DeckList extends Component {
 						onPress={() => this.props.navigation.navigate(
 							'Deck',
 							{ deck }
-					)}>
+						)}>
 						<Text style={styles.deckTitle}>{deck}</Text>
 						<Text style={styles.cardsInDeck}>{decks[deck].questions.length} cards</Text>
 					</TouchableOpacity>

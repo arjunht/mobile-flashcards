@@ -1,5 +1,3 @@
-readme.md
-
 # Mobile Flashcards Project
 
 This is the the final assessment project for Udacity's React Native course.
@@ -13,13 +11,17 @@ Installation and Launch Instructions
 
 The application requires only yarn install and yarn start to install and launch. npm can be used in place of yarn.
 
+## Platform
+
+The app functions correctly in an Android platform using Genymotion as your simulator
+
 ## Project Structure
 
 ```bash
 ├── README.md - This file.
 ├── package.json # npm package manager file.
 ├── actions # Contains all the action creators
-│	└── index.js
+│   └── index.js
 ├── components # Contains all the components
 │   ├── Deck.js
 │   ├── DeckList.js

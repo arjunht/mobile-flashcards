@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Platform, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, Platform, StyleSheet, Animated } from 'react-native';
 import { white, purple } from '../utils/colors';
 import { connect } from 'react-redux';
 
@@ -13,29 +13,51 @@ class Deck extends Component {
 		}
 	}
 	
+	state = {
+		opacity: new Animated.Value(0),
+		width: new Animated.Value(0),
+		height: new Animated.Value(0)
+	}
+	
+	componentDidMount() {
+		const { opacity, width, height } = this.state;
+		
+		Animated.timing(opacity, { toValue: 1, duration: 1000 })
+			.start();
+		
+		Animated.spring(width, { toValue: 300, speed: 5 }).start();
+		Animated.spring(height, { toValue: 300, speed: 5 }).start();
+	}
+	
 	render() {
 		
 		const deck = this.props.deck;
 		const title = deck.title;
 		
+		const { opacity, width, height } = this.state;
+		
 		return (
 			<View style={styles.container}>
-				<Text style={styles.header}>{title}</Text>
-				<Text style={styles.numberOfCards}>{deck.questions.length} cards</Text>
-				<TouchableOpacity 
-					style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
-					onPress={() => this.props.navigation.navigate(
-						'NewQuestion',
-						{ deck: title })}>
-					<Text style={styles.submitBtnText}>Add Card</Text>
-				</TouchableOpacity>
-				<TouchableOpacity 
-					style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
-					onPress={() => this.props.navigation.navigate(
-						'Quiz',
-						{ deck: title })}>
-					<Text style={styles.submitBtnText}>Start Quiz</Text>
-				</TouchableOpacity>
+				<Animated.View style={[styles.center, { opacity, width, height }]}>
+					<Text style={styles.header}>{title}</Text>
+					<Text style={styles.numberOfCards}>{deck.questions.length} cards</Text>
+					<TouchableOpacity 
+						style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
+						onPress={() => this.props.navigation.navigate(
+							'NewQuestion',
+							{ deck: title })}>
+						<Text style={styles.submitBtnText}>Add Card</Text>
+					</TouchableOpacity>
+					{deck.questions.length > 0 &&
+						<TouchableOpacity 
+							style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
+							onPress={() => this.props.navigation.navigate(
+								'Quiz',
+								{ deck: title })}>
+							<Text style={styles.submitBtnText}>Start Quiz</Text>
+						</TouchableOpacity>
+					}
+				</Animated.View>
 			</View>
 		);
 	}
@@ -45,7 +67,10 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		padding: 20,
-		backgroundColor: white,
+		backgroundColor: white
+	},
+	center: {
+		flex: 1,
 		justifyContent: 'space-around',
 		alignItems: 'center',
 		marginRight: 30,

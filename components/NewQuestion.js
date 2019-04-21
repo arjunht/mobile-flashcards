@@ -5,10 +5,11 @@ import { connect } from 'react-redux';
 import { addQuestion } from '../actions';
 import { addCardToDeck } from '../utils/api';
 
-function SubmitBtn ({ onPress }) {
+function SubmitBtn ({ onPress, disabled }) {
 	return (
 		<TouchableOpacity
 			style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
+			disabled={disabled}
 			onPress={onPress}>
 			<Text style={styles.submitBtnText}>SUBMIT</Text>
 		</TouchableOpacity>
@@ -69,7 +70,7 @@ class NewQuestion extends Component {
 						onChangeText={this.handleAnswerChange}
 					/>
 				</View>
-				<SubmitBtn onPress={this.submit} />
+				<SubmitBtn disabled={this.state. question === '' || this.state.answer === ''} onPress={this.submit} />
 			</View>
 		);
 	}
