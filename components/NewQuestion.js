@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, Platform, StyleSheet} from 're
 import { white, purple } from '../utils/colors';
 import { connect } from 'react-redux';
 import { addQuestion } from '../actions';
+import { addCardToDeck } from '../utils/api';
 
 function SubmitBtn ({ onPress }) {
 	return (
@@ -35,14 +36,19 @@ class NewQuestion extends Component {
 	
 	submit = () => {
 		
-		this.props.dispatch(addQuestion(this.props.deck.title, this.state));
+		const { dispatch, deck } = this.props;
+		const card = this.state;
+		
+		const deckTitle = deck.title;
+		
+		dispatch(addQuestion(deckTitle, card));
 		
 		this.setState({
 			question: '',
 			answer: ''
 		});
 		
-		// Save to AsyncStorage - addCardToDeck: take in two arguments, title and card, and will add the card to the list of questions for the deck with the associated title
+		addCardToDeck({deckTitle, card});
 		
 	}
 	

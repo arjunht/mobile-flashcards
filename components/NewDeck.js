@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, Platform, StyleSheet } from 'r
 import { white, purple } from '../utils/colors';
 import { connect } from 'react-redux';
 import { addDeck } from '../actions';
-import { saveDeckTitle } from '../utils/api'
+import { saveDeckTitle } from '../utils/api';
 
 function SubmitBtn ({ onPress }) {
 	return (
@@ -29,17 +29,20 @@ class NewDeck extends Component {
 	
 	submit = () => {
 		
-		this.props.dispatch(addDeck(this.state.deck));
+		const { dispatch, navigation } = this.props;
+		const deck = this.state.deck;
+		
+		dispatch(addDeck(deck));
 		
 		this.setState({
 			deck: ''
 		});
 		
-		saveDeckTitle(this.state.deck);
+		saveDeckTitle(deck);
 		
-		this.props.navigation.navigate(
+		navigation.navigate(
 			'Deck',
-			{ deck: this.state.deck }
+			{ deck: deck }
 		)
 	}
 	

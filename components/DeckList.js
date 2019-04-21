@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 class DeckList extends Component {
 	
 	render() {
-		const { decks } = this.props
+		const { decks } = this.props;
 		
 		if(Object.keys(decks).length === 0) {
 			return (
