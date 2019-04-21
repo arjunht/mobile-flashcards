@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import { Fragment, ScrollView, TouchableOpacity, Text, View, StyleSheet, Platform } from 'react-native';
 import { white } from '../utils/colors';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { getDecks } from '../utils/api';
+import { receiveDecks } from '../actions';
 
 class DeckList extends Component {
+	
+	componentDidMount() {
+		const { dispatch } = this.props;
+		
+		getDecks()
+			.then((decks) => dispatch(receiveDecks(decks)))
+	}
 	
 	render() {
 		const { decks } = this.props;

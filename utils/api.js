@@ -1,6 +1,10 @@
 import { AsyncStorage } from 'react-native';
+import { FLASHCARDS_STORAGE_KEY, formatFlashcardResults } from './_flashcard';
 
-export const FLASHCARDS_STORAGE_KEY = 'Knowledge:flashcards';
+export function getDecks () {
+	return AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY)
+		.then(formatFlashcardResults)
+}
 
 export function saveDeckTitle (deck) {
 	return AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY, JSON.stringify({
