@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Platform, StyleSheet } from 'react-native';
 import { white, purple, red, green } from '../utils/colors';
 import { connect } from 'react-redux';
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
 
 function TextBtn ({ backgroundColor, onPress, buttonTextStyle, buttonText }) {
 	return (
@@ -48,9 +49,16 @@ class Quiz extends Component {
 			questionNumber: 0,
 			numberOfCorrectAnswers: 0
 		});
+		
+		clearLocalNotification()
+			.then(setLocalNotification);
 	};
 	
 	backToDeck = () => {
+		
+		clearLocalNotification()
+			.then(setLocalNotification);
+		
 		this.props.goBack();
 	};
 	
@@ -118,7 +126,7 @@ const styles = StyleSheet.create({
 		marginLeft: 30
 	},
 	questionIndex: {
-		fontSize: 10
+		fontSize: 20
 	},
 	toggleQuestionAnswer: {
 		fontSize: 20,
